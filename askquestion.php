@@ -61,10 +61,10 @@
                 <label for = "Question">Type your question here</label>
                 <textarea class = "form-control" name = "Question" rows = "7" required></textarea>
             </div>    
-
+​
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
-                <input type="cancel" class="btn btn-secondary ml-2" value="Cancel">
+                <input type="button" class="btn btn-secondary ml-2" value="Cancel" onclick="history.back()">
             </div>
         </form>
     </div>    
