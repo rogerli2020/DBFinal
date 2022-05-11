@@ -29,7 +29,7 @@
             </ul>
 
             <?php
-              echo "<a class='nav-link' href='#'>$username</a>"
+              echo "<a class='nav-link' href='user_profile.php?UserID=$UserID&ViewingUserID=$UserID'>$username</a>"
             ?>
             <form class="form-inline my-2 my-lg-0" action="search.php" method="GET">
             <?php             

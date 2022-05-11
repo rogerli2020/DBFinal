@@ -91,6 +91,7 @@
                 $title = $qobj["title"];
                 $body = $qobj["body"];
                 $question_user = $qobj["username"];
+                $question_user_id = $qobj["UserID"];
                 echo "<div class='card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded-0'>";
                 echo "<div class='row align-items-center'>";
                   echo "<div class='col-md-8 mb-3 mb-sm-0'>";
@@ -98,7 +99,7 @@
                     echo "<p class='text-sm'>";
                     echo "<span class='op-6'>Posted on $q_datetime</span>";
                     echo "<span class='op-6'> by </span>";
-                    echo "<a class='text-black' href='#'>$question_user</a>";
+                    echo "<a class='text-black' href='user_profile.php?UserID=$UserID&ViewingUserID=$question_user_id'>$question_user</a>";
                     echo "</p>";
                     echo "<p class='text-sm' style='color:black'>$body</p>";
                     if ($qobj["resolved"] == 1) {
