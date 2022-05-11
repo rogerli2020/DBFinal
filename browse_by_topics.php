@@ -12,7 +12,7 @@
     $obj = $result->fetch_assoc();
     $username = $obj["username"];
 
-    $sql = "WITH RECURSIVE CompleteQuestionToTopicTable(TopicID, QID) AS ( SELECT TopicID, QID FROM Question UNION ALL SELECT parent, CompleteQuestionToTopicTable.QID FROM CompleteQuestionToTopicTable JOIN Topic ON CompleteQuestionToTopicTable.TopicID = Topic.TopicID ) SELECT * FROM CompleteQuestionToTopicTable C JOIN Question Q ON C.QID = Q.QID WHERE C.TopicID = $TopicID;";
+    $sql = "WITH RECURSIVE CompleteQuestionToTopicTable(TopicID, QID) AS ( SELECT TopicID, QID FROM Question UNION ALL SELECT parent, CompleteQuestionToTopicTable.QID FROM CompleteQuestionToTopicTable JOIN Topic ON CompleteQuestionToTopicTable.TopicID = Topic.TopicID ) SELECT * FROM CompleteQuestionToTopicTable C JOIN Question Q ON C.QID = Q.QID WHERE C.TopicID = $TopicID ORDER BY Q.q_datetime DESC;";
     $result = $con->query($sql);
     $results_count = mysqli_num_rows($result);
 ?>
