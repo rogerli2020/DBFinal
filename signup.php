@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             VALUES (default, '$username', '$first_name', '$last_name', '$email', '$password', '$city', '$state', '$country', '$profile', 1)";
             $result = $con->query($insert);
             if ($result){
-                $Success = "Success! You can now login";
+                $Success = "Success! You can now <a href='login.php'>log in</a>";
             }
         }
         else{
@@ -58,20 +58,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         .wrapper{ width: 360px; padding: 20px; }
     </style>
 </head>
-<body>
-    <?php 
+<body style="background:#eee;color: #708090;">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href='#'><strong><i>WebpageLogo</i></strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+            </div>
+            </nav>
+    <!-- navbar-end -->
+
+    <div class="container">
+    <div style="margin-top:50px; margin-bottom: 20px;">
+        </div>
+        <?php 
         if ($Success){
             echo '<h1>'. "$Success".'</h1>';
         }
         else if ($Taken){
-            echo '<h1>'. "$Taken". '</h1';
+            echo '<h1>'. "$Taken". '</h1>';
         }
         else{
             echo '<h1>'. "$Failed".'</h1>';
         }
         ?>
-    <div class="wrapper">
-        <h2>Sign Up</h2>
+        <h3 style='color:black'><strong>Sign Up</strong></h3>
         <p>Please fill this form to create an account.</p>
         <form action="signup.php" method="post">
             <div class="form-group">

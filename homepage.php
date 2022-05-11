@@ -69,11 +69,12 @@
                 $qobj = $qresult->fetch_assoc();
                 $title = $qobj["title"];
                 $body = $qobj["body"];
+                $QID = $qobj["QID"];
                 echo "<div class='card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded-0'>";
                 echo "<div class='row align-items-center'>";
                   echo "<div class='col-md-8 mb-3 mb-sm-0'>";
                     echo "<p class='text-sm'>You asked this question on $qa_datetime: </p>";
-                    echo "<h5><a href='#' class='text-primary'>$title</a></h5>";
+                    echo "<h5><a href='question.php?QID=$QID' class='text-primary'>$title</a></h5>";
                     if ($qobj["resolved"] == 1) {
                       echo "<p class='text-success mr-2'>Resolved</p>";
                     } else {
@@ -105,15 +106,17 @@
                 $question_user = $aobj["username"];
                 $body = $aobj["answer_body"];
                 $q_datetime = $aobj["q_datetime"];
+                $aQID = $aobj["QID"];
+                $question_user_id = $aobj["UserID"];
                 echo "<div class='card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded-0'>";
                 echo "<div class='row align-items-center'>";
                   echo "<div class='col-md-8 mb-3 mb-sm-0'>";
                     echo "<p class='text-sm'>You answered this question on $qa_datetime: </p>";
-                    echo "<h5><a href='#' class='text-primary'>$title</a></h5>";
+                    echo "<h5><a href='question.php?QID=$aQID' class='text-primary'>$title</a></h5>";
                     echo "<p class='text-sm'>";
                       echo "<span class='op-6'>Posted on $q_datetime</span>";
                       echo "<span class='op-6'> by </span>";
-                      echo "<a class='text-black' href='#'>$question_user</a>";
+                      echo "<a class='text-black' href='user_profile.php?ViewingUserID=$question_user_id'>$question_user</a>";
                     echo "</p>";
                     if ($qobj["resolved"] == 1) {
                       echo "<p class='text-success mr-2'>Resolved</p>";

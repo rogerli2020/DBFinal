@@ -39,10 +39,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         .wrapper{ width: 360px; padding: 20px; }
     </style>
 </head>
-<body>
-    <div class="wrapper">
-        <h2>Login</h2>
+<body style="background:#eee;color: #708090;">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href='#'><strong><i>WebpageLogo</i></strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+            </div>
+            </nav>
+    <!-- navbar-end -->
+
+    <div class="container">
+    <div style="margin-top:50px; margin-bottom: 20px;">
+        </div>
+    <h3 style='color:black'><strong>Log In</strong></h3>
         <p>Do not have an account? <a href='signup.php'>Click here</a> to sign up.</p>
+        <?php 
+        if ($Failed){
+            echo '<p><strong>'. "$Failed".'</strong></p>';
+        }
+        ?>
+        <br>
         <form action="login.php" method="post">
             <div class="form-group">
                 <label>Username</label>
@@ -59,10 +81,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
         </form>
     </div>    
-    <?php 
-        if ($Failed){
-            echo '<p1>'. "$Failed".'</p1>';
-        }
-        ?>
 </body>
 </html>

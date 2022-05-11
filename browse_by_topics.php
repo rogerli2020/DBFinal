@@ -86,12 +86,13 @@
                 $q_datetime = $qobj['q_datetime'];
                 $title = $qobj["title"];
                 $body = $qobj["body"];
+                $QID = $qobj["QID"];
                 $question_user = $qobj["username"];
                 $question_user_id = $qobj["UserID"];
                 echo "<div class='card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded-0'>";
                 echo "<div class='row align-items-center'>";
                   echo "<div class='col-md-8 mb-3 mb-sm-0'>";
-                    echo "<h5><a href='#' class='text-primary'>$title</a></h5>";
+                    echo "<h5><a href='question.php?QID=$QID' class='text-primary'>$title</a></h5>";
                     echo "<p class='text-sm'>";
                     echo "<span class='op-6'>Posted on $q_datetime</span>";
                     echo "<span class='op-6'> by </span>";
