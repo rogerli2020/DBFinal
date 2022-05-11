@@ -16,12 +16,17 @@
 
                 <div class="pos-relative px-3 py-3">
                 <?php
-                    $sql = "SELECT topic_name FROM Topic";
+                    $sql = "SELECT topic_name, TopicID FROM Topic";
                     $result = $con->query($sql);
-                    $obj = $result->fetch_assoc();
                     while ($obj = $result->fetch_assoc()) {
                       $topic_name = $obj["topic_name"];
-                      echo "<button type='button' class='btn btn-primary' style='margin:5px'>$topic_name</button>";
+                      $TopicID = $obj["TopicID"];
+                      echo "<form action='browse_by_topics.php' method='GET'>";
+                      echo "<input type='hidden' name='TopicID' value='$TopicID'>";
+                      echo "<input type='hidden' name='UserID' value='$UserID'>";
+                      echo "<input type='hidden' name='topicName' value='$topic_name'>";
+                      echo "<button type='submit' class='btn btn-primary' style='margin:5px'>$topic_name</button>";
+                      echo "</form>";
                     }
                     $con->close();
                 ?>

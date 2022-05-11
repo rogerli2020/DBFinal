@@ -1,4 +1,5 @@
 <?php
+    // $UserID = 2;
     $UserID = $_GET['UserID'];
     include 'connection.php';
 
