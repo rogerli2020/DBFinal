@@ -69,43 +69,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         <form action="signup.php" method="post">
             <div class="form-group">
                 <label>Username</label>
-                <input type="text" name="username" >
+                <input type="text" name="username" required>
             </div>    
             <div class="form-group">
                 <label>Password</label>
-                <input type="text" name="password">
+                <input type="text" name="password" required>
             </div>
             <div class="form-group">
                 <label>Confirm Password</label>
-                <input type="text" name="confirm_password" >
+                <input type="text" name="confirm_password" required>
             </div>
             <div class="form-group">
                 <label>First Name</label>
-                <input type="text" name="first_name" >
+                <input type="text" name="first_name" required>
             </div>    
             <div class="form-group">
                 <label>Last Name</label>
-                <input type="text" name="last_name">
+                <input type="text" name="last_name" required>
             </div>
             <div class="form-group">
                 <label>email</label>
-                <input type="email" name="email" >
+                <input type="email" name="email" required>
             </div>
             <div class="form-group">
                 <label>City</label>
-                <input type="text" name="city">
+                <input type="text" name="city" required>
             </div>
             <div class="form-group">
                 <label>State</label>
-                <input type = "text" name = state>
+                <input type = "text" name = state required>
             </div>    
             <div class="form-group">
                 <label>country</label>
-                <input type="text" name="country" >
+                <input type="text" name="country" required>
             </div>
             <div class="form-group">
                 <label for = "profile">Enter a short description of yourself</label>
-                <textarea class = "form-control" name = "profile" rows = "5"></textarea>
+                <textarea class = "form-control" name = "profile" rows = "5" required></textarea>
             </div>    
 
             <div class="form-group">
