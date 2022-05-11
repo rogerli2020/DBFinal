@@ -1,6 +1,13 @@
 <?php
-    $UserID = $_GET['UserID'];
 
+    session_start();
+    if (!isset($_SESSION['UserID'])){
+        header("refresh:5; login.php"); // redirect after 5 second pause
+        echo "You're not logged in. Redirecting you to login page in 5 seconds or click <a href=\"login.php\">here</a>.";
+        exit();
+    }
+    $UserID = $_SESSION['UserID'];
+    
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         include 'connection.php';
         $topic_name = $_POST['topic_name'];
@@ -16,7 +23,7 @@
         #$insert = "INSERT INTO Question VALUES (default, '$userid', '$title', '$topicID', '$body', NOW(), 0)";
         $insert = "INSERT INTO Question (QID, UserID, title, TopicID, body, q_datetime, resolved) VALUES (default,$UserID,'$title',$topicID,'$body',NOW(),0)";
         $result = $con->query($insert);      
-        header("location: homepage.php?UserID=".$UserID);
+        header("location: homepage.php?");
     }
 ?>
 
@@ -40,7 +47,7 @@
         </div>
         <br>
         <h3 style='color:black'><strong>Ask Question</strong></h3>
-        <form action="askquestion.php?UserID=<?php echo $UserID ?>" method="post">
+        <form action="askquestion.php" method="post">
             <div class="form-group">
                 <label for="Topic_name">Choose question topic</label>
                 <select class="form-control" name="topic_name">

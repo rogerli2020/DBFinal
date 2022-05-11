@@ -1,7 +1,13 @@
 <?php
     // $UserID = 2;
     // $ViewingUserID = 2;
-    $UserID = $_GET['UserID'];  
+    session_start();
+    if (!isset($_SESSION['UserID'])){
+        header("refresh:5; login.php"); // redirect after 5 second pause
+        echo "You're not logged in. Redirecting you to login page in 5 seconds or click <a href=\"login.php\">here</a>.";
+        exit();
+    }
+    $UserID = $_SESSION['UserID'];
     $ViewingUserID = $_GET['ViewingUserID'];  
 
     include 'connection.php';
@@ -57,6 +63,13 @@
           echo "<h6><strong>Contact Email: </strong>$pemail</h6>";
           echo "<h6><strong>Lives in: </strong>$pcity, $pstate, $pcountry</h6>";
           echo "<h6><strong>User Status: </strong>$puser_status</h6>";
+        ?>
+
+        <?php
+            if ($UserID == $ViewingUserID) {
+                echo "<a href='logout.php' class='btn btn-danger' role='button' style='margin:1px'>Sign Out</a>";
+                echo "<br><br>";
+            }
         ?>
         
         <br>

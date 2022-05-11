@@ -5,7 +5,7 @@
 
               
             <?php
-            echo "<a class='btn btn-lg btn-block btn-success rounded-0 py-4 mb-3 bg-op-6 roboto-bold' href='askquestion.php?UserID=$UserID'>Ask Question</a>";
+            echo "<a class='btn btn-lg btn-block btn-success rounded-0 py-4 mb-3 bg-op-6 roboto-bold' href='askquestion.php'>Ask Question</a>";
             ?>
               
               <div class="bg-white mb-3">
@@ -23,7 +23,6 @@
                       $TopicID = $obj["TopicID"];
                       echo "<form action='browse_by_topics.php' method='GET'>";
                       echo "<input type='hidden' name='TopicID' value='$TopicID'>";
-                      echo "<input type='hidden' name='UserID' value='$UserID'>";
                       echo "<input type='hidden' name='topicName' value='$topic_name'>";
                       echo "<button type='submit' class='btn btn-primary' style='margin:5px'>$topic_name</button>";
                       echo "</form>";

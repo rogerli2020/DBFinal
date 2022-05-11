@@ -2,7 +2,13 @@
     // $UserID = 2;
     // $keyword = "web";
     // $order_by = 'dt';
-    $UserID = $_GET['UserID'];  
+    session_start();
+    if (!isset($_SESSION['UserID'])){
+        header("refresh:5; login.php"); // redirect after 5 second pause
+        echo "You're not logged in. Redirecting you to login page in 5 seconds or click <a href=\"login.php\">here</a>.";
+        exit();
+    }
+    $UserID = $_SESSION['UserID'];
     $keyword = $_GET['keyword'];
     $order_by = $_GET['order_by'];    
 
@@ -46,7 +52,6 @@
           <label for="Topic_name">Sort by</label><br>
           <div class="btn-group" style="max-width:25%; margin-bottom:5px">
             <?php
-              echo "<input type='hidden' name='UserID' value='$UserID'>";
               echo "<input type='hidden' name='keyword' value='$keyword'>";
             ?>
             <select class="form-control" name="order_by">
@@ -99,7 +104,7 @@
                     echo "<p class='text-sm'>";
                     echo "<span class='op-6'>Posted on $q_datetime</span>";
                     echo "<span class='op-6'> by </span>";
-                    echo "<a class='text-black' href='user_profile.php?UserID=$UserID&ViewingUserID=$question_user_id'>$question_user</a>";
+                    echo "<a class='text-black' href='user_profile.php?ViewingUserID=$question_user_id'>$question_user</a>";
                     echo "</p>";
                     echo "<p class='text-sm' style='color:black'>$body</p>";
                     if ($qobj["resolved"] == 1) {

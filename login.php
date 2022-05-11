@@ -2,6 +2,13 @@
 $Success = false;
 $Failed = false;
 
+session_start();
+if (isset($_SESSION['UserID'])){
+    header("refresh:5; homepage.php"); // redirect after 5 second pause
+    echo "You're already logged in. Redirecting you to your homepage in 5 seconds or click <a href=\"homepage.php\">here</a>.";
+    exit();
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     include 'connection.php';
     $username = $_POST["username"];
@@ -11,7 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $result = $con->query($sql);
     if ($result -> num_rows > 0){
         $row = $result->fetch_assoc();
-        header("location: homepage.php?UserID=".$row["UserID"]);
+        session_start();
+        $_SESSION['UserID'] = $row["UserID"];
+        header("location: homepage.php");
     }
     else
         $Failed = "Incorrect Username or Password";
@@ -33,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
     <div class="wrapper">
         <h2>Login</h2>
+        <p>Do not have an account? <a href='signup.php'>Click here</a> to sign up.</p>
         <form action="login.php" method="post">
             <div class="form-group">
                 <label>Username</label>

@@ -3,6 +3,13 @@ $Success = false;
 $Taken = false;
 $Failed = false;
 
+session_start();
+if (isset($_SESSION['UserID'])){
+    header("refresh:5; homepage.php"); // redirect after 5 second pause
+    echo "You're already logged in. Log out first to create a new account. <br> Redirecting you to your homepage in 5 seconds or click <a href=\"homepage.php\">here</a>.";
+    exit();
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     include 'connection.php';
     $username = $_POST["username"];

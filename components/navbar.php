@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href='homepage.php?UserID=<?php echo $UserID?>'><strong><i>WebpageLogo</i></strong></a>
+        <a class="navbar-brand" href='homepage.php?'><strong><i>WebpageLogo</i></strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -29,11 +29,10 @@
             </ul>
 
             <?php
-              echo "<a class='nav-link' href='user_profile.php?UserID=$UserID&ViewingUserID=$UserID'>$username</a>"
+              echo "<a class='nav-link' href='user_profile.php?ViewingUserID=$UserID'>$username</a>"
             ?>
             <form class="form-inline my-2 my-lg-0" action="search.php" method="GET">
             <?php             
-              echo "<input type='hidden' name='UserID' value='$UserID'>";
               echo "<input type='hidden' name='order_by' value='Relevance'>";
             ?>
             <input name="keyword" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" required>

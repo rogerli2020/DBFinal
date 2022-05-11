@@ -1,6 +1,12 @@
 <?php
     // $UserID = 2;
-    $UserID = $_GET['UserID'];
+    session_start();
+    if (!isset($_SESSION['UserID'])){
+        header("refresh:5; login.php"); // redirect after 5 second pause
+        echo "You're not logged in. Redirecting you to login page in 5 seconds or click <a href=\"login.php\">here</a>.";
+        exit();
+    }
+    $UserID = $_SESSION['UserID'];
     include 'connection.php';
 
     $sql = "SELECT * FROM Users NATURAL JOIN user_status WHERE UserID = $UserID";

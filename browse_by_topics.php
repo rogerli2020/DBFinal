@@ -2,7 +2,13 @@
     // $UserID = 2;
     // $TopicID = 2;
     // $topicName = 'CS';
-    $UserID = $_GET['UserID'];  
+    session_start();
+    if (!isset($_SESSION['UserID'])){
+        header("refresh:5; login.php"); // redirect after 5 second pause
+        echo "You're not logged in. Redirecting you to login page in 5 seconds or click <a href=\"login.php\">here</a>.";
+        exit();
+    }
+    $UserID = $_SESSION['UserID'];
     $TopicID = $_GET['TopicID'];
     $topicName = $_GET['topicName'];
 
@@ -50,7 +56,7 @@
           while ($parentObj = $parentTopicsResult->fetch_assoc()) {
             $parentID = $parentObj['TopicID'];
             $parentName = $parentObj['topic_name'];
-            echo "<a href='browse_by_topics.php?UserID=$UserID&TopicID=$parentID&topicName=$parentName' class='btn btn-info' role='button' style='margin:1px'>$parentName</a>";
+            echo "<a href='browse_by_topics.php?TopicID=$parentID&topicName=$parentName' class='btn btn-info' role='button' style='margin:1px'>$parentName</a>";
           }
 
           echo "</h5>";
@@ -89,7 +95,7 @@
                     echo "<p class='text-sm'>";
                     echo "<span class='op-6'>Posted on $q_datetime</span>";
                     echo "<span class='op-6'> by </span>";
-                    echo "<a class='text-black' href='user_profile.php?UserID=$UserID&ViewingUserID=$question_user_id'>$question_user</a>";
+                    echo "<a class='text-black' href='user_profile.php?ViewingUserID=$question_user_id'>$question_user</a>";
                     echo "</p>";
                     echo "<p class='text-sm' style='color:black'>$body</p>";
                     if ($qobj["resolved"] == 1) {
