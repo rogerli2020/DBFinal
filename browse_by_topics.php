@@ -1,6 +1,7 @@
 <?php
     // $UserID = 2;
     // $TopicID = 2;
+    // $topicName = 'CS';
     $UserID = $_GET['UserID'];  
     $TopicID = $_GET['TopicID'];
     $topicName = $_GET['topicName'];
@@ -37,7 +38,24 @@
         <br>
         <?php
           echo "<h3 style='color:black'><strong>Questions Under Topic '$topicName':</strong></h3>";
-          echo "<h6>$results_count results found.</h6><br><br>";
+
+          $parentTopicsQuery = "WITH RECURSIVE parentTopics(TopicID) AS ( SELECT parent FROM Topic WHERE Topic.TopicID = $TopicID UNION ALL SELECT parent FROM parentTopics JOIN Topic ON parentTopics.TopicID = Topic.TopicID WHERE parent IS NOT NULL ) SELECT TopicID, topic_name FROM parentTopics NATURAL JOIN Topic ORDER BY TopicID;";
+          $parentTopicsResult = $con->query($parentTopicsQuery);
+          $parentTopicCount = mysqli_num_rows($parentTopicsResult);
+
+          if ($parentTopicCount != 0) {
+
+          echo "<h5>Parent topic(s): ";
+
+          while ($parentObj = $parentTopicsResult->fetch_assoc()) {
+            $parentID = $parentObj['TopicID'];
+            $parentName = $parentObj['topic_name'];
+            echo "<a href='browse_by_topics.php?UserID=$UserID&TopicID=$parentID&topicName=$parentName' class='btn btn-info' role='button' style='margin:1px'>$parentName</a>";
+          }
+
+          echo "</h5>";
+          }
+          echo "<br><br><h6>$results_count results found.</h6><br><br>";
         ?>
         
         <div class="row">
