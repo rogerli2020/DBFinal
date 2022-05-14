@@ -20,7 +20,7 @@
     $qresult = $con->query($qsql);
     $qobj = $qresult->fetch_assoc();
     $title = $qobj["title"];
-    $username = $qobj["username"];
+    $askUsername = $qobj["username"];
     $askUserID = $qobj["UserID"];
     $body = $qobj["body"];
     $qdatetime = $qobj["q_datetime"];
@@ -55,7 +55,7 @@
                 echo "<div class='card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded-0'>";
                 echo "<div class='row align-items-center'>";
                   echo "<div class='col-md-8 mb-3 mb-sm-0'>";
-                  echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$askUserID'>$username</a> asked this question on: $adatetime </p>";
+                  echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$askUserID'>$askUsername</a> asked this question on: $adatetime </p>";
                     echo "<h5><a href='question.php?QID=$QID' class='text-primary'>$title</a></h5>";
                     echo "<p class='text-sm' style='color:black'>$body</p>";
                     if ($qobj["resolved"] == 1) {
@@ -98,7 +98,7 @@
                 $aresult = $con->query($resolvedsql);
                 $baobj = $aresult->fetch_assoc();
                 $adatetime = $baobj["a_datetime"];
-                $username = $baobj["username"];
+                $bausername = $baobj["username"];
                 $questionUserID = $baobj["UserID"];
                 $answer_body = $baobj["answer_body"];
                 $ansid = $baobj["AnsID"];
@@ -113,10 +113,10 @@
                 echo "<div class='row align-items-center'>";
                 echo "<h6><class='text-primary' style='margin-left:10px'>$votes Upvotes</h6>";
                   echo "<div class='col-md-8 mb-3 mb-sm-0'>";
-                  echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$questionUserID'>$username</a> answered on: $adatetime </p>";
+                  echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$questionUserID'>$bausername</a> answered on: $adatetime </p>";
                   echo "<p class='text-sm' style='color:black'>$answer_body</p>";
 
-                  
+
                   $checkIfVotedSQL = "SELECT * FROM Thumbed_up WHERE UserID = $UserID AND AnsID = $ansid";
                   $checkRes = $con->query($checkIfVotedSQL);
                   if (mysqli_num_rows($checkRes) != 0) {
@@ -149,7 +149,7 @@
                 echo "<p style='margin-bottom:5px'>OTHER ANSWER(S)</p>";
               }
             while ($aobj = $aresult->fetch_assoc()) {
-                $username = $aobj["username"];
+                $ausername = $aobj["username"];
                 $adatetime = $aobj["a_datetime"];
                 $answer_body = $aobj["answer_body"];
                 $ansid = $aobj["AnsID"];
@@ -164,7 +164,7 @@
                 echo "<div class='row align-items-center'>";
                 echo "<h6><class='text-primary' style='margin-left:10px'>$votes Upvotes</h6>";
                   echo "<div class='col-md-8 mb-3 mb-sm-0'>";
-                    echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$questionUserID'>$username</a> answered on: $adatetime </p>";
+                    echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$questionUserID'>$ausername</a> answered on: $adatetime </p>";
                     echo "<p class='text-sm' style='color:black'>$answer_body</p>";
 
                     if (($qobj["resolved"] == 0) && ($qobj["UserID"] == $UserID)){
