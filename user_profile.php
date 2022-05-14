@@ -1,6 +1,4 @@
 <?php
-    // $UserID = 2;
-    // $ViewingUserID = 2;
     session_start();
     if (!isset($_SESSION['UserID'])){
         header("refresh:5; login.php"); // redirect after 5 second pause
