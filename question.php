@@ -60,7 +60,30 @@
                       }
                   echo "</div>";
                 echo "</div>";
-              echo "</div>";
+                
+                $topicSql = "SELECT TopicID, topic_name FROM Topic NATURAL JOIN Question WHERE QID = $QID";
+                $topicSqlRes = $con->query($topicSql);
+                $topicSqlObj = $topicSqlRes->fetch_assoc();
+                $qTopicName = $topicSqlObj['topic_name'];
+                $qTopicID = $topicSqlObj['TopicID'];
+
+                echo "<p>Topic: ";
+                echo "<a href='browse_by_topics.php?TopicID=$qTopicID&topicName=$qTopicName' class='btn btn-info btn-sm' role='button' style='margin:1px'>$qTopicName</a><br>";
+
+                $parentTopicsQuery = "WITH RECURSIVE parentTopics(TopicID) AS ( SELECT parent FROM Topic WHERE Topic.TopicID = $qTopicID UNION ALL SELECT parent FROM parentTopics JOIN Topic ON parentTopics.TopicID = Topic.TopicID WHERE parent IS NOT NULL ) SELECT TopicID, topic_name FROM parentTopics NATURAL JOIN Topic ORDER BY TopicID;";
+                $parentTopicsResult = $con->query($parentTopicsQuery);
+                $parentTopicCount = mysqli_num_rows($parentTopicsResult);
+      
+                if ($parentTopicCount != 0) {
+                echo "Parent topic(s): ";
+                while ($parentObj = $parentTopicsResult->fetch_assoc()) {
+                  $parentID = $parentObj['TopicID'];
+                  $parentName = $parentObj['topic_name'];
+                  echo "<a href='browse_by_topics.php?TopicID=$parentID&topicName=$parentName' class='btn btn-info btn-sm' role='button' style='margin:1px'>$parentName</a>";
+                }
+                }
+                echo "</p>";
+                echo "</div>";
 
 
               if ($qobj["resolved"] == 1) {
@@ -85,7 +108,7 @@
                 echo "<div class='row align-items-center'>";
                 echo "<h6><class='text-primary' style='margin-left:10px'>$votes Upvotes</h6>";
                   echo "<div class='col-md-8 mb-3 mb-sm-0'>";
-                  echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$questionUserID'>$username</a> answered this question on: $adatetime </p>";
+                  echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$questionUserID'>$username</a> answered on: $adatetime </p>";
                   echo "<p class='text-sm' style='color:black'>$answer_body</p>";
 
                   echo "</div>";
@@ -126,7 +149,7 @@
                 echo "<div class='row align-items-center'>";
                 echo "<h6><class='text-primary' style='margin-left:10px'>$votes Upvotes</h6>";
                   echo "<div class='col-md-8 mb-3 mb-sm-0'>";
-                    echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$questionUserID'>$username</a> answered this question on: $adatetime </p>";
+                    echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$questionUserID'>$username</a> answered on: $adatetime </p>";
                     echo "<p class='text-sm' style='color:black'>$answer_body</p>";
 
                   echo "</div>";

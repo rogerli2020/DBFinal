@@ -51,15 +51,15 @@
 
           if ($parentTopicCount != 0) {
 
-          echo "<h5>Parent topic(s): ";
+          echo "<h6>Parent topic(s): ";
 
           while ($parentObj = $parentTopicsResult->fetch_assoc()) {
             $parentID = $parentObj['TopicID'];
             $parentName = $parentObj['topic_name'];
-            echo "<a href='browse_by_topics.php?TopicID=$parentID&topicName=$parentName' class='btn btn-info' role='button' style='margin:1px'>$parentName</a>";
+            echo "<a href='browse_by_topics.php?TopicID=$parentID&topicName=$parentName' class='btn btn-info btn-sm' role='button' style='margin:1px'>$parentName</a>";
           }
 
-          echo "</h5>";
+          echo "</h6>";
           }
           echo "<br><br><h6>$results_count results found.</h6><br><br>";
         ?>
