@@ -43,13 +43,14 @@
             $qobj = $qresult->fetch_assoc();
             $title = $qobj["title"];
             $username = $qobj["username"];
+            $askUserID = $qobj["UserID"];
             $body = $qobj["body"];
             $qdatetime = $qobj["q_datetime"];
 
                 echo "<div class='card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded-0'>";
                 echo "<div class='row align-items-center'>";
                   echo "<div class='col-md-8 mb-3 mb-sm-0'>";
-                    echo "<p class='text-sm'>$username asked this question on: $qdatetime: </p>";
+                  echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$askUserID'>$username</a> asked this question on: $adatetime </p>";
                     echo "<h5><a href='question.php?QID=$QID' class='text-primary'>$title</a></h5>";
                     echo "<p class='text-sm' style='color:black'>$body</p>";
                     if ($qobj["resolved"] == 1) {
@@ -63,12 +64,14 @@
 
 
               if ($qobj["resolved"] == 1) {
-                echo "BEST ANSWER";
+                echo "<hr>";
+                echo "<p style='margin-bottom:5px;margin-top:10px;color:MediumSeaGreen'><strong>BEST ANSWER</strong></p>";
                 $resolvedsql = "SELECT * from bestanswer natural join answer natural join users where QID = $QID";
                 $aresult = $con->query($resolvedsql);
                 $baobj = $aresult->fetch_assoc();
                 $adatetime = $baobj["a_datetime"];
                 $username = $baobj["username"];
+                $questionUserID = $baobj["UserID"];
                 $answer_body = $baobj["answer_body"];
                 $ansid = $baobj["AnsID"];
                 
@@ -80,10 +83,10 @@
 
               echo "<div class='card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded-0'>";
                 echo "<div class='row align-items-center'>";
-                echo "<h5><class='text-primary'>$votes Upvotes</h5>";
+                echo "<h6><class='text-primary' style='margin-left:10px'>$votes Upvotes</h6>";
                   echo "<div class='col-md-8 mb-3 mb-sm-0'>";
-                    echo "<p class='text-sm'>$username answered this question on: $adatetime </p>";
-                    echo "<p class='text-sm' style='color:black'>$answer_body</p>";
+                  echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$questionUserID'>$username</a> answered this question on: $adatetime </p>";
+                  echo "<p class='text-sm' style='color:black'>$answer_body</p>";
 
                   echo "</div>";
                 echo "</div>";
@@ -102,23 +105,28 @@
               echo "</div>";
             }
             else{
+              // if ((mysqli_num_rows($aresult) > 1) && ($qobj["resolved" == 1])) {
+              if ((mysqli_num_rows($aresult) > 0) && $qobj["resolved"] == 1) {
+                echo "<hr>";
+                echo "<p style='margin-bottom:5px'>OTHER ANSWER(S)</p>";
+              }
             while ($aobj = $aresult->fetch_assoc()) {
                 $username = $aobj["username"];
                 $adatetime = $aobj["a_datetime"];
                 $answer_body = $aobj["answer_body"];
                 $ansid = $aobj["AnsID"];
+                $questionUserID = $aobj["UserID"];
 
                 $votesql = "SELECT count(*) as votes from thumbed_up where ansid = $ansid";
                 $vresult = $con->query($votesql);
                 $vobj = $vresult->fetch_assoc();
                 $votes = $vobj["votes"];
                 
-                echo "OTHER ANSWERS";
                 echo "<div class='card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded-0'>";
                 echo "<div class='row align-items-center'>";
-                echo "<h5><class='text-primary'>$votes Upvotes</h5>";
+                echo "<h6><class='text-primary' style='margin-left:10px'>$votes Upvotes</h6>";
                   echo "<div class='col-md-8 mb-3 mb-sm-0'>";
-                    echo "<p class='text-sm'>$username answered this question on: $adatetime </p>";
+                    echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$questionUserID'>$username</a> answered this question on: $adatetime </p>";
                     echo "<p class='text-sm' style='color:black'>$answer_body</p>";
 
                   echo "</div>";
