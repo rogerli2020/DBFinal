@@ -1,7 +1,4 @@
 <?php
-    // $UserID = 2;
-    // $TopicID = 2;
-    // $topicName = 'CS';
     session_start();
     if (!isset($_SESSION['UserID'])){
         header("refresh:5; login.php"); // redirect after 5 second pause
