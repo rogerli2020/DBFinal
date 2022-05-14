@@ -12,16 +12,16 @@ if (isset($_SESSION['UserID'])){
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     include 'connection.php';
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    $confirm_password = $_POST["confirm_password"];
-    $first_name = $_POST["first_name"];
-    $last_name = $_POST["last_name"];
-    $email = $_POST["email"];
-    $city = $_POST["city"];
-    $state = $_POST["state"];
-    $country = $_POST["country"];
-    $profile = $_POST["profile"];
+    $username = addslashes($_POST["username"]);
+    $password = addslashes($_POST["password"]);
+    $confirm_password = addslashes($_POST["confirm_password"]);
+    $first_name = addslashes($_POST["first_name"]);
+    $last_name = addslashes($_POST["last_name"]);
+    $email = addslashes($_POST["email"]);
+    $city = addslashes($_POST["city"]);
+    $state = addslashes($_POST["state"]);
+    $country = addslashes($_POST["country"]);
+    $profile = addslashes($_POST["profile"]);
 
 
     $sql = "SELECT * from users where username = '$username'";

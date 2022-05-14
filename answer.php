@@ -10,8 +10,9 @@
     
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         include 'connection.php';
-        $answer_body = $_POST['Answer'];
-    
+        
+        $answer_body = addslashes($_POST['Answer']);
+
         $insert = "INSERT INTO Answer (AnsID, QID, UserID, answer_body, a_datetime) VALUES (default, $QID, $UserID, '$answer_body', NOW())";
         $result = $con->query($insert);      
         header("location: question.php?QID=$QID");

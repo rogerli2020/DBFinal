@@ -19,6 +19,10 @@
         $row = $topicres->fetch_assoc();
         $topicID = $row["TopicID"];
     
+        // addslashes allows users to insert string with single quotation marks.
+        $title = addslashes($title);
+        $body = addslashes($body);
+
         #$insert = "INSERT INTO Question VALUES (default, '$userid', '$title', '$topicID', '$body', NOW(), 0)";
         $insert = "INSERT INTO Question (QID, UserID, title, TopicID, body, q_datetime, resolved) VALUES (default,$UserID,'$title',$topicID,'$body',NOW(),0)";
         $result = $con->query($insert);      
@@ -67,7 +71,6 @@
                 <label for = "Question">Type your question here</label>
                 <textarea class = "form-control" name = "Question" rows = "7" required></textarea>
             </div>    
-​
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="button" class="btn btn-secondary ml-2" value="Cancel" onclick="history.back()">
