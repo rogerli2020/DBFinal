@@ -55,7 +55,7 @@
                 echo "<div class='card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded-0'>";
                 echo "<div class='row align-items-center'>";
                   echo "<div class='col-md-8 mb-3 mb-sm-0'>";
-                  echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$askUserID'>$askUsername</a> asked this question on: $adatetime </p>";
+                  echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$askUserID'>$askUsername</a> asked this question on: $qdatetime </p>";
                     echo "<h5><a href='question.php?QID=$QID' class='text-primary'>$title</a></h5>";
                     echo "<p class='text-sm' style='color:black'>$body</p>";
                     if ($qobj["resolved"] == 1) {
