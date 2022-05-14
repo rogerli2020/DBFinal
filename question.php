@@ -9,13 +9,13 @@
     $UserID = $_SESSION['UserID'];
     include 'connection.php';
 
+    #used to get usernames and status names
     $sql = "SELECT * FROM Users NATURAL JOIN user_status WHERE UserID = $UserID";
     $result = $con->query($sql);
     $obj = $result->fetch_assoc();
-    
     $username = $obj["username"];
 
-
+    #fetch question information and users who wrote it
     $qsql = "SELECT * FROM Question natural join users WHERE QID = $QID";
     $qresult = $con->query($qsql);
     $qobj = $qresult->fetch_assoc();
@@ -65,7 +65,8 @@
                       }
                   echo "</div>";
                 echo "</div>";
-                
+
+                #fetch topics of the current question to diplay
                 $topicSql = "SELECT TopicID, topic_name FROM Topic NATURAL JOIN Question WHERE QID = $QID";
                 $topicSqlRes = $con->query($topicSql);
                 $topicSqlObj = $topicSqlRes->fetch_assoc();
@@ -94,6 +95,7 @@
               if ($qobj["resolved"] == 1) {
                 echo "<hr>";
                 echo "<p style='margin-bottom:5px;margin-top:10px;color:MediumSeaGreen'><strong>BEST ANSWER</strong></p>";
+                #fetch the best answer if one exists and display it first
                 $resolvedsql = "SELECT * from bestanswer natural join answer natural join users where QID = $QID";
                 $aresult = $con->query($resolvedsql);
                 $baobj = $aresult->fetch_assoc();
@@ -103,7 +105,7 @@
                 $answer_body = $baobj["answer_body"];
                 $ansid = $baobj["AnsID"];
                 
-
+                #diplay the number of uopvotes the best answer has
                 $votesql = "SELECT count(*) as votes from thumbed_up where ansid = $ansid";
                 $vresult = $con->query($votesql);
                 $vobj = $vresult->fetch_assoc();
@@ -116,7 +118,7 @@
                   echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$questionUserID'>$bausername</a> answered on: $adatetime </p>";
                   echo "<p class='text-sm' style='color:black'>$answer_body</p>";
 
-
+                  #used to launch upvote.php if user decided to upvote an answer
                   $checkIfVotedSQL = "SELECT * FROM Thumbed_up WHERE UserID = $UserID AND AnsID = $ansid";
                   $checkRes = $con->query($checkIfVotedSQL);
                   if (mysqli_num_rows($checkRes) != 0) {
@@ -130,7 +132,7 @@
                 echo "</div>";
               echo "</div>";
             }
-
+            #select the rest of the answers (those not in the best answer table) (repeats last section for non best answers)
             $asql = "SELECT* from answer natural join users where QID = $QID and ansid not in (select ansid from bestanswer)";
             $aresult = $con->query($asql);
             if ((mysqli_num_rows($aresult) == 0) && ($qobj["resolved"] == 0)) {
@@ -143,7 +145,6 @@
               echo "</div>";
             }
             else{
-              // if ((mysqli_num_rows($aresult) > 1) && ($qobj["resolved" == 1])) {
               if ((mysqli_num_rows($aresult) > 0) && $qobj["resolved"] == 1) {
                 echo "<hr>";
                 echo "<p style='margin-bottom:5px'>OTHER ANSWER(S)</p>";
@@ -155,6 +156,7 @@
                 $ansid = $aobj["AnsID"];
                 $questionUserID = $aobj["UserID"];
 
+                #get the number of times an answer was upvoted to display next to answer
                 $votesql = "SELECT count(*) as votes from thumbed_up where ansid = $ansid";
                 $vresult = $con->query($votesql);
                 $vobj = $vresult->fetch_assoc();
