@@ -23,7 +23,7 @@
         $title = addslashes($title);
         $body = addslashes($body);
 
-        #$insert = "INSERT INTO Question VALUES (default, '$userid', '$title', '$topicID', '$body', NOW(), 0)";
+        
         $insert = "INSERT INTO Question (QID, UserID, title, TopicID, body, q_datetime, resolved) VALUES (default,$UserID,'$title',$topicID,'$body',NOW(),0)";
         $result = $con->query($insert);      
         header("location: homepage.php?");
