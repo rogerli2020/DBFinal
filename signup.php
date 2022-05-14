@@ -23,10 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $country = addslashes($_POST["country"]);
     $profile = addslashes($_POST["profile"]);
 
-
+    #check if username taken
     $sql = "SELECT * from users where username = '$username'";
     $result = $con->query($sql);
-    
+    #if user does not exist insert into user table
     if (mysqli_num_rows($result) == 0){
         if($password == $confirm_password){
             $insert = "INSERT INTO Users
