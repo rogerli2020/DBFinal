@@ -133,7 +133,7 @@
 
             $asql = "SELECT* from answer natural join users where QID = $QID and ansid not in (select ansid from bestanswer)";
             $aresult = $con->query($asql);
-            if ((mysqli_num_rows($aresult) == 0) && ($qobj["resolved" == 0])) {
+            if ((mysqli_num_rows($aresult) == 0) && ($qobj["resolved"] == 0)) {
                 echo "<div class='card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded-0'>";
                 echo "<div class='row align-items-center'>";
                   echo "<div class='col-md-8 mb-3 mb-sm-0'>";
