@@ -9,7 +9,7 @@
         exit();
     }
     $UserID = $_SESSION['UserID'];
-    $keyword = $_GET['keyword'];
+    $keyword = addslashes($_GET['keyword']);
     $order_by = $_GET['order_by'];    
 
     include 'connection.php';
