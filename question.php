@@ -116,7 +116,15 @@
                   echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$questionUserID'>$username</a> answered on: $adatetime </p>";
                   echo "<p class='text-sm' style='color:black'>$answer_body</p>";
 
-                  echo "<button type='button' class='btn btn-outline-primary btn-sm'>👍 Upvote</button>";
+                  
+                  $checkIfVotedSQL = "SELECT * FROM Thumbed_up WHERE UserID = $UserID AND AnsID = $ansid";
+                  $checkRes = $con->query($checkIfVotedSQL);
+                  if (mysqli_num_rows($checkRes) != 0) {
+                    echo "<a href='upvote.php?AnsID=$ansid&type=cancel&QID=$QID' type='button' class='btn btn-primary btn-sm'>👍 Upvoted</a>";
+                  } else {
+                    echo "<a href='upvote.php?AnsID=$ansid&type=upvote&QID=$QID' type='button' class='btn btn-outline-primary btn-sm'>👍 Upvote</a>";
+                  }
+
 
                   echo "</div>";
                 echo "</div>";
@@ -163,7 +171,13 @@
                       echo "<a href='resolve.php?ansid=$ansid&qid=$QID' class='btn btn-outline-success btn-sm' role='button' style='margin:4px'>Resolve</a>";
                     } 
 
-                    echo "<button type='button' class='btn btn-outline-primary btn-sm'>👍 Upvote</button>";
+                    $checkIfVotedSQL = "SELECT * FROM Thumbed_up WHERE UserID = $UserID AND AnsID = $ansid";
+                    $checkRes = $con->query($checkIfVotedSQL);
+                    if (mysqli_num_rows($checkRes) != 0) {
+                      echo "<a href='upvote.php?AnsID=$ansid&type=cancel&QID=$QID' type='button' class='btn btn-primary btn-sm'>👍 Upvoted</a>";
+                    } else {
+                      echo "<a href='upvote.php?AnsID=$ansid&type=upvote&QID=$QID' type='button' class='btn btn-outline-primary btn-sm'>👍 Upvote</a>";
+                    }
 
                   echo "</div>";
                 echo "</div>";
