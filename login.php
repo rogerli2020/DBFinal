@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $username = $_POST["username"];
     $password = $_POST["password"];
 
+    #check to see if a tuple with input credential exists in the table and if it does, log them in
     $sql = "SELECT UserID FROM Users WHERE username = '$username' and user_password = '$password'";
     $result = $con->query($sql);
     if ($result -> num_rows > 0){
