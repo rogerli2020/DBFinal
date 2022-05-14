@@ -29,6 +29,7 @@
             </ul>
 
             <?php
+              $username = $_SESSION['username'];
               echo "<a class='nav-link' href='user_profile.php?ViewingUserID=$UserID'>$username</a>"
             ?>
             <form class="form-inline my-2 my-lg-0" action="search.php" method="GET">

@@ -130,6 +130,25 @@
             }
         }
             ?>
+                <div class='card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded-0'>
+
+                    <h5 style='color:black'><strong>Your Answer</strong></h5>
+                    <?php
+                    echo "<form action='answer.php?QID=$QID' method='post'>"
+                    ?>
+                        <div class="form-group">
+                            <label for = "Answer">Type your answer here:</label>
+                            <textarea class = "form-control" name = "Answer" rows = "7" required></textarea>
+                        </div>    
+            ​
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        </div>
+                    </form>
+
+                </div>
+
+
           </div>
           <?php include 'components/sidebar.php'?>
         </div>

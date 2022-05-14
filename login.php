@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $row = $result->fetch_assoc();
         session_start();
         $_SESSION['UserID'] = $row["UserID"];
+        $_SESSION['username'] = $username;
         header("location: homepage.php");
     }
     else

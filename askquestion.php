@@ -15,7 +15,6 @@
         $title = $_POST['title'];
 
         $sqlid = "SELECT TopicID from Topic where topic_name = '$topic_name'";
-        
         $topicres = $con->query($sqlid);
         $row = $topicres->fetch_assoc();
         $topicID = $row["TopicID"];
@@ -47,7 +46,7 @@
         </div>
         <br>
         <h3 style='color:black'><strong>Ask Question</strong></h3>
-        <form action="askquestion.php" method="post">
+        <form action="askquestion.php?" method="post">
             <div class="form-group">
                 <label for="Topic_name">Choose question topic</label>
                 <select class="form-control" name="topic_name">
