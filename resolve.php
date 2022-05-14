@@ -11,11 +11,13 @@ include 'connection.php';
 $QID = $_GET['qid'];
 $ansid = $_GET['ansid'];
   
+#inertion into best answer the chosen answerid and the current quesitonid
 $insert = "INSERT INTO bestanswer
 (QID, AnsID)  
 VALUES ($QID, $ansid)";
 $result = $con->query($insert);
 
+#make question resolved in question table
 $update = "UPDATE Question
 SET resolved = 1
 WHERE QID = $QID";
