@@ -14,13 +14,27 @@
     $obj = $result->fetch_assoc();
     
     $username = $obj["username"];
+
+
+    $qsql = "SELECT * FROM Question natural join users WHERE QID = $QID";
+    $qresult = $con->query($qsql);
+    $qobj = $qresult->fetch_assoc();
+    $title = $qobj["title"];
+    $username = $qobj["username"];
+    $askUserID = $qobj["UserID"];
+    $body = $qobj["body"];
+    $qdatetime = $qobj["q_datetime"];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Question</title>
+
+    <?php
+      echo "<title>$title</title>"
+    ?>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body{ font: 14px sans-serif; }
@@ -38,15 +52,6 @@
           <div class="col-lg-9 mb-3">
 
             <?php
-            $qsql = "SELECT * FROM Question natural join users WHERE QID = $QID";
-            $qresult = $con->query($qsql);
-            $qobj = $qresult->fetch_assoc();
-            $title = $qobj["title"];
-            $username = $qobj["username"];
-            $askUserID = $qobj["UserID"];
-            $body = $qobj["body"];
-            $qdatetime = $qobj["q_datetime"];
-
                 echo "<div class='card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded-0'>";
                 echo "<div class='row align-items-center'>";
                   echo "<div class='col-md-8 mb-3 mb-sm-0'>";
@@ -66,8 +71,8 @@
                 $topicSqlObj = $topicSqlRes->fetch_assoc();
                 $qTopicName = $topicSqlObj['topic_name'];
                 $qTopicID = $topicSqlObj['TopicID'];
-
-                echo "<p>Topic: ";
+                      
+                echo "<hr><p>Question topic: ";
                 echo "<a href='browse_by_topics.php?TopicID=$qTopicID&topicName=$qTopicName' class='btn btn-info btn-sm' role='button' style='margin:1px'>$qTopicName</a><br>";
 
                 $parentTopicsQuery = "WITH RECURSIVE parentTopics(TopicID) AS ( SELECT parent FROM Topic WHERE Topic.TopicID = $qTopicID UNION ALL SELECT parent FROM parentTopics JOIN Topic ON parentTopics.TopicID = Topic.TopicID WHERE parent IS NOT NULL ) SELECT TopicID, topic_name FROM parentTopics NATURAL JOIN Topic ORDER BY TopicID;";
@@ -111,6 +116,8 @@
                   echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$questionUserID'>$username</a> answered on: $adatetime </p>";
                   echo "<p class='text-sm' style='color:black'>$answer_body</p>";
 
+                  echo "<button type='button' class='btn btn-outline-primary btn-sm'>👍 Upvote</button>";
+
                   echo "</div>";
                 echo "</div>";
               echo "</div>";
@@ -152,11 +159,14 @@
                     echo "<p class='text-sm'><a href='user_profile.php?ViewingUserID=$questionUserID'>$username</a> answered on: $adatetime </p>";
                     echo "<p class='text-sm' style='color:black'>$answer_body</p>";
 
+                    if (($qobj["resolved"] == 0) && ($qobj["UserID"] == $UserID)){
+                      echo "<a href='resolve.php?ansid=$ansid&qid=$QID' class='btn btn-outline-success btn-sm' role='button' style='margin:4px'>Resolve</a>";
+                    } 
+
+                    echo "<button type='button' class='btn btn-outline-primary btn-sm'>👍 Upvote</button>";
+
                   echo "</div>";
                 echo "</div>";
-                if (($qobj["resolved"] == 0) && ($qobj["UserID"] == $UserID)){
-                    echo "<a href='resolve.php?ansid=$ansid&qid=$QID'>Resolve</a>";
-                  } 
               echo "</div>";
             }
         }
