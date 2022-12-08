@@ -1,5 +1,4 @@
 <?php
-    // $UserID = 2;
     session_start();
     if (!isset($_SESSION['UserID'])){
         header("refresh:5; login.php"); // redirect after 5 second pause
@@ -82,20 +81,6 @@
                     }
                     echo "<p class='text-sm' style='color:black'>$body</p>";
                   echo "</div>";
-
-                //   echo "<div class='col-md-4 op-7'>";
-                //   echo "<div class='row text-center op-7'>";
-                //     echo "<div class='col px-1'><i class='ion-ios-eye-outline icon-1x'></i><span class='d-block text-sm'>";
-                //       if ($qobj["resolved"] == 1) {
-                //         echo "<p class='text-success mr-2'>Resolved</p>";
-                //       } else {
-                //         echo "<p class='text-danger mr-2'>Unresolved</p>";
-                //       }
-                //     echo "</span> </div>";
-                //   echo "</div>";
-                // echo "</div>";
-
-
                 echo "</div>";
               echo "</div>";
               } else {
@@ -118,27 +103,13 @@
                       echo "<span class='op-6'> by </span>";
                       echo "<a class='text-black' href='user_profile.php?ViewingUserID=$question_user_id'>$question_user</a>";
                     echo "</p>";
-                    if ($qobj["resolved"] == 1) {
+                    if ($aobj["resolved"] == 1) {
                       echo "<p class='text-success mr-2'>Resolved</p>";
                     } else {
                       echo "<p class='text-danger mr-2'>Unresolved</p>";
                     }
                     echo "<p class='text-sm' style='color:black'><strong>Your answer:</strong> $body</p>";
                   echo "</div>";
-
-                //   echo "<div class='col-md-4 op-7'>";
-                //   echo "<div class='row text-center op-7'>";
-                //     echo "<div class='col px-1'><i class='ion-ios-eye-outline icon-1x'></i><span class='d-block text-sm'>";
-                //       if ($aobj["resolved"] == 1) {
-                //         echo "<p class='text-success mr-2'>Resolved</p>";
-                //       } else {
-                //         echo "<p class='text-danger mr-2'>Unresolved</p>";
-                //       }
-                //     echo "</span> </div>";
-                //   echo "</div>";
-                // echo "</div>";
-
-                
                 echo "</div>";
               echo "</div>";
 
@@ -146,29 +117,6 @@
             }
 
             ?>
-            <!-- End of post 1 -->
-            <!-- <div class="card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded-0">
-              <div class="row align-items-center">
-                <div class="col-md-8 mb-3 mb-sm-0">
-                  <p class="text-sm">You answered this question on [date]: </p>
-                  <h5>
-                    <a href="#" class="text-primary">How do I do CS?</a>
-                  </h5>
-                  <p class="text-sm">
-                    <span class="op-6">Posted on</span> 
-                    <a class="text-black" href="#">[date]</a> 
-                    <span class="op-6">by</span> 
-                    <a class="text-black" href="#">[user]</a>
-                  </p>
-                  <div class="text-sm op-5"> 
-                    <a class="text-black mr-2" href="#">#C++</a> 
-                    <a class="text-black mr-2" href="#">#AppStrap Theme</a> 
-                    <a class="text-black mr-2" href="#">#Wordpress</a> 
-                  </div>
-                </div>
-              </div>
-            </div> -->
-            <!-- /End of post 1 -->
           </div>
           <?php include 'components/sidebar.php'?>
         </div>

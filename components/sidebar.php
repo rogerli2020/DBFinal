@@ -16,6 +16,7 @@
 
                 <div class="pos-relative px-3 py-3">
                 <?php
+                  #select each topic to diplay
                     $sql = "SELECT topic_name, TopicID FROM Topic";
                     $result = $con->query($sql);
                     while ($obj = $result->fetch_assoc()) {
@@ -30,16 +31,6 @@
                     $con->close();
                 ?>
                 </div>
-                <!-- ELEMENT START -->
-                <!-- <hr class="m-0">
-                <div class="pos-relative px-3 py-3">
-                  <h6 class="text-primary text-sm">
-                    <a href="#" class="text-primary">Why Bootstrap 4 is so awesome? </a>
-                  </h6>
-                  <p class="mb-0 text-sm"><span class="op-6">Posted</span> <a class="text-black" href="#">39 minutes</a> <span class="op-6">ago by</span> <a class="text-black" href="#">AppStrapMaster</a></p>
-                </div> -->
-                <!-- ELEMENT END -->
-
               </div>
             </div></div>
           </div>

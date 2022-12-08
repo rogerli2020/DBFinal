@@ -1,7 +1,4 @@
 <?php
-    // $UserID = 2;
-    // $keyword = "web";
-    // $order_by = 'dt';
     session_start();
     if (!isset($_SESSION['UserID'])){
         header("refresh:5; login.php"); // redirect after 5 second pause
@@ -9,7 +6,7 @@
         exit();
     }
     $UserID = $_SESSION['UserID'];
-    $keyword = $_GET['keyword'];
+    $keyword = addslashes($_GET['keyword']);
     $order_by = $_GET['order_by'];    
 
     include 'connection.php';
@@ -114,9 +111,6 @@
                       echo "<p class='text-danger mr-2'>Unresolved</p>";
                     }
                     echo "<div class='text-sm op-5'>";
-                      // <a class="text-black mr-2" href="#">#C++</a> 
-                      // <a class="text-black mr-2" href="#">#AppStrap Theme</a> 
-                      // <a class="text-black mr-2" href="#">#Wordpress</a> 
                     echo "</div>";
                   echo "</div>";
                 echo "</div>";
